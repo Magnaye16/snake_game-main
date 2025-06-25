@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://mv0qkpiwooyr"]
+
+[ext_resource type="Texture2D" uid="uid://dxyvfago0gd5f" path="res://assets/apple.png" id="1_iusa3"]
+
+[node name="SnakeHead" type="Node2D"]
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(24.5, 25)
+scale = Vector2(0.98, 1)
+texture = ExtResource("1_iusa3")

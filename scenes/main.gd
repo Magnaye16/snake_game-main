@@ -1,6 +1,10 @@
 extends Node
 
-@export var snake_scene : PackedScene
+#@export var snake_scene : PackedScene
+
+@export var snake_head : PackedScene
+@export var snake_segment : PackedScene
+
 
 #game variables
 var score : int
@@ -47,16 +51,23 @@ func generate_snake():
 	old_data.clear()
 	snake_data.clear()
 	snake.clear()
+
+	# Add head
+	add_segment(start_pos, true)
 	#starting with the start_pos, create tail segments vertically down
-	for i in range(3):
-		add_segment(start_pos + Vector2(0, i))
+	#for i in range(1):
+		#add_segment(start_pos + Vector2(0, i))
 		
-func add_segment(pos):
+func add_segment(pos: Vector2, is_head: bool = false):
 	snake_data.append(pos)
-	var SnakeSegment = snake_scene.instantiate()
-	SnakeSegment.position = (pos * cell_size) + Vector2(0, cell_size)
-	add_child(SnakeSegment)
-	snake.append(SnakeSegment)
+	var segment
+	if is_head:
+		segment = snake_head.instantiate()
+	else:
+		segment = snake_segment.instantiate()
+	segment.position = (pos * cell_size) + Vector2(0, cell_size)
+	add_child(segment)
+	snake.append(segment)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
