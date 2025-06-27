@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://mv0qkpiwooyr"]
+[gd_scene load_steps=8 format=3 uid="uid://mv0qkpiwooyr"]
 
 [ext_resource type="Texture2D" uid="uid://daa6mu72ooys" path="res://assets/pac_man_hd_sprites_by_saidgthegreat_dhdxdls-375w-2x-removebg-preview.png" id="1_iusa3"]
 [ext_resource type="Script" uid="uid://crqv0n8c8ngl8" path="res://scenes/snake_head.gd" id="1_oa4ia"]
+[ext_resource type="PackedScene" uid="uid://beaa828xfn3nx" path="res://scenes/snake_segment.tscn" id="2_p4i03"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oa4ia"]
 atlas = ExtResource("1_iusa3")
@@ -34,6 +35,7 @@ animations = [{
 
 [node name="SnakeHead" type="Node2D"]
 script = ExtResource("1_oa4ia")
+snake_segment = ExtResource("2_p4i03")
 
 [node name="Panel" type="Panel" parent="."]
 visible = false
@@ -45,8 +47,6 @@ position = Vector2(24.5, 25)
 scale = Vector2(0.98, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
-position = Vector2(0.510203, 5.96046e-08)
 scale = Vector2(1.59439, 1.5625)
 sprite_frames = SubResource("SpriteFrames_v8gl1")
 autoplay = "default"
-frame_progress = 0.415217

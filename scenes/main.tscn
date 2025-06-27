@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://esywf0ii8i6u"]
+[gd_scene load_steps=10 format=3 uid="uid://esywf0ii8i6u"]
 
 [ext_resource type="Script" uid="uid://bvtlfkeakvp15" path="res://scenes/main.gd" id="1_fmw02"]
 [ext_resource type="Texture2D" uid="uid://bj2ambwei5ogi" path="res://assets/bg.png" id="2_fps3c"]
@@ -7,12 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://tmcq5gpw66gu" path="res://scenes/hud.tscn" id="3_s77pf"]
 [ext_resource type="Texture2D" uid="uid://dxyvfago0gd5f" path="res://assets/apple.png" id="5_sxedt"]
 [ext_resource type="PackedScene" uid="uid://cad25ojl47q8" path="res://scenes/game_over_menu.tscn" id="6_xkat8"]
+[ext_resource type="Script" uid="uid://crqv0n8c8ngl8" path="res://scenes/snake_head.gd" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://4w4s57dd133s" path="res://code_edit.tscn" id="8_tipki"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" node_paths=PackedStringArray("snek")]
 script = ExtResource("1_fmw02")
-snake_head = ExtResource("3_o6xl0")
-snake_segment = ExtResource("2_io2sj")
+snek = NodePath("Snakehead")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(500, 550)
@@ -21,7 +21,7 @@ texture = ExtResource("2_fps3c")
 [node name="Hud" parent="." instance=ExtResource("3_s77pf")]
 
 [node name="MoveTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 5.0
 
 [node name="Food" type="Sprite2D" parent="."]
 scale = Vector2(1.02, 0.96)
@@ -37,8 +37,16 @@ offset_right = 50.0
 offset_bottom = 50.0
 
 [node name="CodeHUD" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Control" parent="CodeHUD" instance=ExtResource("8_tipki")]
 
-[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[node name="Snakehead" type="Node2D" parent="." node_paths=PackedStringArray("runner")]
+script = ExtResource("7_o6xl0")
+snake_head = ExtResource("3_o6xl0")
+snake_segment = ExtResource("2_io2sj")
+runner = NodePath("..")
+metadata/_custom_type_script = "uid://crqv0n8c8ngl8"
+
+[connection signal="timeout" from="MoveTimer" to="Snakehead" method="_on_move_timer_timeout"]
 [connection signal="restart" from="GameOverMenu" to="." method="_on_game_over_menu_restart"]

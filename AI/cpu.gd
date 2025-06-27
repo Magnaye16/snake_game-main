@@ -11,7 +11,7 @@ var has_duck_request:bool = false
 
 @export var snek:Snakehead
 
-func _init(_snake:Snakehead) -> void:
+func _init(_snake:) -> void:
 	snek = _snake
 
 func get_speed()->float:
