@@ -114,6 +114,7 @@ offset_right = 355.0
 offset_bottom = 429.0
 
 [node name="BackMenuButton" type="Button" parent="LeaderBoardPanel"]
+layout_mode = 0
 offset_left = 79.0
 offset_top = 462.0
 offset_right = 320.0

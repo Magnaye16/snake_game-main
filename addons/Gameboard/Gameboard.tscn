@@ -1,0 +1,73 @@
+[gd_scene load_steps=18 format=3 uid="uid://jw7vf62byhdd"]
+
+[ext_resource type="Script" path="res://addons/Gameboard/Scripts/GameboardPlugin.cs" id="1_1hfqg"]
+[ext_resource type="Script" path="res://addons/Gameboard/Scripts/AndroidClient/GameboardAndroidService.cs" id="2_2tad2"]
+[ext_resource type="Script" path="res://addons/Gameboard/Scripts/Controllers/TouchController.cs" id="2_e20xg"]
+[ext_resource type="Script" path="res://addons/Gameboard/Scripts/Controllers/AssetController.cs" id="4_xhvac"]
+[ext_resource type="Script" path="res://addons/Gameboard/Scripts/Controllers/CardController.cs" id="5_2l61p"]
+[ext_resource type="Script" path="res://addons/Gameboard/Scripts/Controllers/UserPresenceController.cs" id="6_7jv4s"]
+[ext_resource type="Script" path="res://addons/Gameboard/Scripts/Controllers/TabNavController.cs" id="7_4lk8a"]
+[ext_resource type="Script" path="res://addons/Gameboard/Scripts/Controllers/DeviceEventController.cs" id="8_jenr8"]
+[ext_resource type="Script" path="res://addons/Gameboard/Scripts/Controllers/DiceRollController.cs" id="9_7bhd4"]
+[ext_resource type="Script" path="res://addons/Gameboard/Scripts/Controllers/PlayerArmingController.cs" id="10_t8c6v"]
+[ext_resource type="Script" path="res://addons/Gameboard/Scripts/Controllers/StabilityAIController.cs" id="11_11lse"]
+[ext_resource type="Script" path="res://addons/Gameboard/Scripts/Controllers/OpenAIController.cs" id="12_x6rrh"]
+[ext_resource type="Script" path="res://addons/Gameboard/Scripts/Controllers/DrawerController.cs" id="14_m5rp1"]
+[ext_resource type="Script" path="res://addons/Gameboard/Scripts/Controllers/EngagementController.cs" id="15_yjvtu"]
+[ext_resource type="Script" path="res://addons/Gameboard/Scripts/Controllers/RatingController.cs" id="16_3nb6j"]
+[ext_resource type="Script" path="res://addons/Gameboard/Scripts/Controllers/ButtonController.cs" id="17_j85le"]
+[ext_resource type="Script" path="res://addons/Gameboard/Scripts/Controllers/GridController.cs" id="17_sfqvd"]
+
+[node name="Gameboard" type="Node"]
+script = ExtResource("1_1hfqg")
+mockGameboardId = "1234567890"
+
+[node name="Services" type="Node" parent="."]
+
+[node name="GameboardAndroidService" type="Node" parent="Services"]
+script = ExtResource("2_2tad2")
+
+[node name="UserPresenceController" type="Node" parent="."]
+script = ExtResource("6_7jv4s")
+
+[node name="AssetController" type="Node" parent="."]
+script = ExtResource("4_xhvac")
+
+[node name="ButtonController" type="Node" parent="."]
+script = ExtResource("17_j85le")
+
+[node name="TouchController" type="Node" parent="."]
+script = ExtResource("2_e20xg")
+
+[node name="CardController" type="Node" parent="."]
+script = ExtResource("5_2l61p")
+
+[node name="TabNavController" type="Node" parent="."]
+script = ExtResource("7_4lk8a")
+
+[node name="DeviceEventController" type="Node" parent="."]
+script = ExtResource("8_jenr8")
+
+[node name="DiceRollController" type="Node" parent="."]
+script = ExtResource("9_7bhd4")
+
+[node name="PlayerArmingController" type="Node" parent="."]
+script = ExtResource("10_t8c6v")
+
+[node name="StabilityAIController" type="Node" parent="."]
+script = ExtResource("11_11lse")
+
+[node name="OpenAIController" type="Node" parent="."]
+script = ExtResource("12_x6rrh")
+
+[node name="DrawerController" type="Node" parent="."]
+script = ExtResource("14_m5rp1")
+
+[node name="EngagementController" type="Node" parent="."]
+script = ExtResource("15_yjvtu")
+
+[node name="RatingController" type="Node" parent="."]
+script = ExtResource("16_3nb6j")
+
+[node name="GridController" type="Node" parent="."]
+script = ExtResource("17_sfqvd")

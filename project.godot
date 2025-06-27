@@ -25,6 +25,10 @@ window/stretch/scale=0.65
 
 project/assembly_name="snake_tutorial"
 
+[editor_plugins]
+
+enabled=PackedStringArray()
+
 [input]
 
 move_left={

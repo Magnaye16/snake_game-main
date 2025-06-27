@@ -1,9 +1,12 @@
 extends Node
+class_name  Runner
 
 #@export var snake_scene : PackedScene
 
 @export var snake_head : PackedScene
 @export var snake_segment : PackedScene
+@export var snek:Snakehead
+var cpu:CPU 
 
 
 #game variables
@@ -71,6 +74,7 @@ func add_segment(pos: Vector2, is_head: bool = false):
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	#snek.cpu.clear_request()
 	move_snake()
 	
 func move_snake():
