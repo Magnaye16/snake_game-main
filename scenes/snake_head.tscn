@@ -1,8 +1,32 @@
-[gd_scene load_steps=8 format=3 uid="uid://mv0qkpiwooyr"]
+[gd_scene load_steps=17 format=3 uid="uid://mv0qkpiwooyr"]
 
 [ext_resource type="Texture2D" uid="uid://daa6mu72ooys" path="res://assets/pac_man_hd_sprites_by_saidgthegreat_dhdxdls-375w-2x-removebg-preview.png" id="1_iusa3"]
 [ext_resource type="Script" uid="uid://crqv0n8c8ngl8" path="res://scenes/snake_head.gd" id="1_oa4ia"]
 [ext_resource type="PackedScene" uid="uid://beaa828xfn3nx" path="res://scenes/snake_segment.tscn" id="2_p4i03"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8gl1"]
+atlas = ExtResource("1_iusa3")
+region = Rect2(64, 0, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2puga"]
+atlas = ExtResource("1_iusa3")
+region = Rect2(0, 93, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_geswf"]
+atlas = ExtResource("1_iusa3")
+region = Rect2(32, 93, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6ut0"]
+atlas = ExtResource("1_iusa3")
+region = Rect2(64, 0, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e40d7"]
+atlas = ExtResource("1_iusa3")
+region = Rect2(0, 31, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8emr"]
+atlas = ExtResource("1_iusa3")
+region = Rect2(32, 31, 32, 31)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oa4ia"]
 atlas = ExtResource("1_iusa3")
@@ -16,8 +40,48 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("1_iusa3")
 region = Rect2(32, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kapg"]
+atlas = ExtResource("1_iusa3")
+region = Rect2(64, 0, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujprb"]
+atlas = ExtResource("1_iusa3")
+region = Rect2(0, 62, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vjg4"]
+atlas = ExtResource("1_iusa3")
+region = Rect2(32, 62, 32, 31)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_v8gl1"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8gl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2puga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_geswf")
+}],
+"loop": true,
+"name": &"Down",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6ut0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e40d7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8emr")
+}],
+"loop": true,
+"name": &"Left",
+"speed": 8.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oa4ia")
@@ -29,11 +93,25 @@ animations = [{
 "texture": SubResource("AtlasTexture_cf3pd")
 }],
 "loop": true,
-"name": &"default",
+"name": &"Right",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kapg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujprb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vjg4")
+}],
+"loop": true,
+"name": &"Up",
 "speed": 8.0
 }]
 
-[node name="SnakeHead" type="Node2D"]
+[node name="SnakeHead" type="Node2D" groups=["Head"]]
 script = ExtResource("1_oa4ia")
 snake_segment = ExtResource("2_p4i03")
 
@@ -49,4 +127,5 @@ scale = Vector2(0.98, 1)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
 scale = Vector2(1.59439, 1.5625)
 sprite_frames = SubResource("SpriteFrames_v8gl1")
-autoplay = "default"
+animation = &"Right"
+autoplay = "Right"

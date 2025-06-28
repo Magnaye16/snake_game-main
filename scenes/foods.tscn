@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ioic1"]
 radius = 20.025
 
-[node name="foods" type="Area2D"]
+[node name="foods" type="Area2D" groups=["Foods"]]
 script = ExtResource("1_ioic1")
 
 [node name="Food" type="Sprite2D" parent="."]

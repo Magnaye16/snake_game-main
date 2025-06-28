@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=650
 window/size/viewport_height=680
+window/stretch/mode="canvas_items"
 window/stretch/scale=0.65
 
 [dotnet]
@@ -28,6 +29,11 @@ project/assembly_name="snake_tutorial"
 [editor_plugins]
 
 enabled=PackedStringArray()
+
+[global_group]
+
+Foods=""
+Head=""
 
 [input]
 

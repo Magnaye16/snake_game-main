@@ -1,5 +1,5 @@
 extends CodeEdit
-class_name Gameboard
+#class_name Gameboard
 
 @onready  var button: Button = $"../Button"
 
