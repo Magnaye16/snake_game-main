@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://fjuu5kyihdjs"]
+
+[ext_resource type="Script" uid="uid://becia7frg80bx" path="res://scenes/obstacle_node.gd" id="1_w2pm4"]
+[ext_resource type="Texture2D" uid="uid://cqjnyd17dmq7j" path="res://assets/wall.jpg" id="2_w2pm4"]
+
+[node name="Obstacle_Node" type="Node2D" groups=["Obstacle"]]
+script = ExtResource("1_w2pm4")
+
+[node name="Obstacle" type="Sprite2D" parent="."]
+position = Vector2(19.3846, 19.3846)
+scale = Vector2(0.184615, 0.184615)
+texture = ExtResource("2_w2pm4")
+offset = Vector2(25, 25)
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+offset_right = 48.0
+offset_bottom = 48.0

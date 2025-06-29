@@ -1,6 +1,7 @@
 extends Node
 class_name Runner
 
+const obstacle_scene = preload("res://scenes/obstacle_node.tscn")
 @onready var code_ui: Control = $CodeHUD/Control
 @export var snek: Snakehead
 var cpu: CPU
@@ -17,6 +18,11 @@ var cell_size: int = 50
 var food_pos: Vector2
 var regen_food: bool = true
 
+#Obstacle variables
+var obs_pos: Vector2
+var gen_obs: bool = true
+var num_obs: int = 15
+
 # Movement variables
 var up = Vector2(0, -1)
 var down = Vector2(0, 1)
@@ -25,7 +31,7 @@ var right = Vector2(1, 0)
 var move_direction: Vector2
 var can_move: bool
 
-	
+
 
 func _ready():
 	cpu = snek.cpu
@@ -36,18 +42,16 @@ func _ready():
 func new_game():
 	get_tree().paused = false
 	get_tree().call_group("segments", "queue_free")
+	get_tree().call_group("Obstacle", "queue_free")
 	$GameOverMenu.hide()
 	score = 0
 	$Hud.get_node("ScoreLabel").text = "SCORE: " + str(score)
 	#move_direction = up
 	can_move = true
 	snek.generate()
-	move_food()
+	init_and_move_food()
+	init_move_obstacle()
 	snek.cpu.start()
-	
-
-
-
 
 func move_snake():
 	if can_move:
@@ -87,7 +91,6 @@ func start_game():
 	game_started = true
 	$MoveTimer.start()
 	new_game()
-	
 
 func check_out_of_bounds():
 	if snek.snake_data[0].x < 0 or snek.snake_data[0].x > cells - 1 \
@@ -105,17 +108,47 @@ func check_food_eaten():
 		score += 1
 		$Hud.get_node("ScoreLabel").text = "SCORE: " + str(score)
 		snek.add_segment(snek.old_data[-1])
-		move_food()
+		init_and_move_food()
 
-func move_food():
+func init_and_move_food():
 	while regen_food:
 		regen_food = false
 		food_pos = Vector2(randi_range(0, cells - 1), randi_range(0, cells - 1))
+		
+		#avoid placing food on top of the snake
 		for i in snek.snake_data:
 			if food_pos == i:
 				regen_food = true
+				
 	$Food.position = (food_pos * cell_size) + Vector2(0, cell_size)
 	regen_food = true
+
+func init_move_obstacle():
+	var generated = 0
+	
+	while generated < num_obs:
+		gen_obs = false
+		obs_pos = Vector2(randi_range(0, cells - 1), randi_range(0, cells - 1))
+		
+		# avoid placing obstacle on top of the snake
+		for i in snek.snake_data:
+			if obs_pos == i:
+				gen_obs = true
+				break
+		
+		if not gen_obs:
+			var obs_instance = obstacle_scene.instantiate()
+			obs_instance.position = (obs_pos * cell_size) + Vector2(0, cell_size)
+			add_child(obs_instance)
+			obs_instance.add_to_group("Obstacle")  # Optional: helps with group logic
+			generated += 1
+	regen_food = true
+
+func check_obs_eaten():
+	for obs in get_tree().get_nodes_in_group("Obstacle"):
+		if obs is Node2D and snek.snake_data[0] == (obs.position - Vector2(0, cell_size)) / cell_size:
+			end_game()
+			return
 
 func end_game():
 	$GameOverMenu.show()

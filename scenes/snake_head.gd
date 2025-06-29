@@ -82,4 +82,5 @@ func _on_move_timer_timeout():
 		snake_part[i].position = (snake_data[i] * runner.cell_size) + Vector2(0, runner.cell_size)
 	runner.check_out_of_bounds()
 	runner.check_self_eaten()
-	runner.check_food_eaten()	
+	runner.check_food_eaten()
+	runner.check_obs_eaten()
