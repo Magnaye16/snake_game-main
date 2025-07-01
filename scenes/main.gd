@@ -50,6 +50,7 @@ func new_game():
 	get_tree().call_group("segments", "queue_free")
 	get_tree().call_group("Obstacle", "queue_free")
 	$GameOverMenu.hide()
+	$Food.show()
 	score = 0
 	$Hud.get_node("ScoreLabel").text = "SCORE: " + str(score)
 	#move_direction = up

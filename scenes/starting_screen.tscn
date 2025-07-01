@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://diblibmt1p53y"]
+
+[ext_resource type="PackedScene" uid="uid://tmcq5gpw66gu" path="res://scenes/hud.tscn" id="1_vdvo5"]
+[ext_resource type="Texture2D" uid="uid://bj2ambwei5ogi" path="res://assets/bg.png" id="2_lyhl5"]
+[ext_resource type="FontFile" uid="uid://csofpxg8wptq5" path="res://assets/Fonts/Pixelon-E4JEg.otf" id="3_ihen6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ih3ue"]
+bg_color = Color(0, 0.0666667, 0.0941176, 0.831373)
+
+[node name="Starting Screen" type="CanvasLayer"]
+
+[node name="Hud" parent="." instance=ExtResource("1_vdvo5")]
+visible = false
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(500, 550)
+texture = ExtResource("2_lyhl5")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -186.0
+offset_top = -163.0
+offset_right = 189.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ih3ue")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 29
+alignment = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("3_ihen6")
+theme_override_font_sizes/font_size = 64
+text = "GAME TITLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 29
+alignment = 2
+
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_ihen6")
+theme_override_font_sizes/font_size = 40
+text = "START"
+
+[node name="Button2" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_ihen6")
+theme_override_font_sizes/font_size = 40
+text = "OPTION"
+
+[node name="Button3" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_ihen6")
+theme_override_font_sizes/font_size = 40
+text = "QUIT"

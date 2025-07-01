@@ -1,22 +1,40 @@
-[gd_scene load_steps=9 format=3 uid="uid://btn21005gj87l"]
+[gd_scene load_steps=10 format=3 uid="uid://btn21005gj87l"]
 
 [ext_resource type="Script" uid="uid://b4ktir2p0uh0g" path="res://codeediet.gd" id="1_5kt5r"]
 [ext_resource type="Texture2D" uid="uid://bj2ambwei5ogi" path="res://assets/bg.png" id="1_l1kfe"]
 [ext_resource type="Script" uid="uid://cmx56khgmt7vk" path="res://code_edit.gd" id="1_mm888"]
 [ext_resource type="PackedScene" uid="uid://tmcq5gpw66gu" path="res://scenes/hud.tscn" id="2_mm888"]
+[ext_resource type="FontFile" uid="uid://csofpxg8wptq5" path="res://assets/Fonts/Pixelon-E4JEg.otf" id="4_3umq0"]
+[ext_resource type="Texture2D" uid="uid://i723kh83i07d" path="res://assets/icons8-play-64.png" id="4_xpa0m"]
 
 [sub_resource type="CodeHighlighter" id="CodeHighlighter_5kt5r"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mm888"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kt5r"]
 bg_color = Color(0, 0.0666667, 0.0941176, 0.831373)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kt5r"]
-bg_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
-
 [sub_resource type="CodeHighlighter" id="CodeHighlighter_3umq0"]
+number_color = Color(0.995766, 1, 0.318056, 1)
 symbol_color = Color(0.654902, 0.772549, 0.976471, 1)
 function_color = Color(0.384314, 0.854902, 0.94902, 1)
-member_variable_color = Color(0.698039, 0.709804, 0.72549, 1)
+member_variable_color = Color(0.670588, 0.788235, 1, 1)
+keyword_colors = {
+"as": Color(1, 0.439, 0.522, 1),
+"class_name": Color(1, 0.439, 0.522, 1),
+"extends": Color(1, 0.439, 0.522, 1),
+"false": Color(1, 0.439, 0.522, 1),
+"for": Color(0.976, 0.537, 0.78, 1),
+"func": Color(1, 0.439, 0.522, 1),
+"in": Color(1, 0.439, 0.522, 1),
+"is": Color(1, 0.439, 0.522, 1),
+"not": Color(1, 0.439, 0.522, 1),
+"pass": Color(0.976, 0.537, 0.78, 1),
+"return": Color(0.976, 0.537, 0.78, 1),
+"true": Color(1, 0.439, 0.522, 1),
+"var": Color(1, 0.439, 0.522, 1)
+}
+color_regions = {
+"\" \"": Color(0.976, 0.91, 0.62, 1)
+}
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -25,7 +43,7 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -325.0
+offset_left = -602.0
 offset_top = -341.0
 offset_right = 323.0
 offset_bottom = 340.0
@@ -34,6 +52,7 @@ grow_vertical = 2
 script = ExtResource("1_5kt5r")
 
 [node name="Background" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(500, 550)
 texture = ExtResource("1_l1kfe")
 
@@ -77,13 +96,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -326.0
-offset_top = -288.5
-offset_right = 326.0
-offset_bottom = 288.5
+offset_left = -308.5
+offset_top = -376.5
+offset_right = 590.5
+offset_bottom = 424.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_mm888")
+theme_override_styles/panel = SubResource("StyleBoxFlat_5kt5r")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -95,13 +114,16 @@ layout_mode = 2
 
 [node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "RUN"
+icon = ExtResource("4_xpa0m")
+flat = true
 
 [node name="CodeEdit" type="CodeEdit" parent="PanelContainer/VBoxContainer"]
+texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("4_3umq0")
+theme_override_font_sizes/font_size = 24
 theme_override_colors/code_folding_color = Color(0.252028, 0.252028, 0.252028, 1)
-theme_override_styles/panel = SubResource("StyleBoxFlat_5kt5r")
 text = "extends CPU
 
 func start():
@@ -109,6 +131,7 @@ func start():
 
 func loop(delta:float):
 	pass"
+minimap_width = 100
 caret_blink = true
 syntax_highlighter = SubResource("CodeHighlighter_3umq0")
 highlight_all_occurrences = true
@@ -118,6 +141,7 @@ line_folding = true
 gutters_draw_line_numbers = true
 gutters_zero_pad_line_numbers = true
 gutters_draw_fold_gutter = true
+delimiter_comments = Array[String](["#"])
 code_completion_enabled = true
 indent_automatic = true
 auto_brace_completion_enabled = true
