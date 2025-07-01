@@ -35,6 +35,7 @@ enabled=PackedStringArray()
 Foods=""
 Head=""
 Obstacle=""
+Goal=""
 
 [input]
 

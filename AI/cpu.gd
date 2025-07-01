@@ -47,22 +47,16 @@ func go_right():
 func get_food_location():
 	var location =  (snek.get_tree().get_nodes_in_group("Foods") as Array[Foods])[0].position/50
 	location -= Vector2(0,1)
-	#print(location)
-	return location
-	
-func obs_loc():#test
-	var location =  (snek.get_tree().get_nodes_in_group("Obstacle") as Array[Obstacle])[0].position/50
-	location -= Vector2(0,0)
-	#print(location)
+	print(location)
 	return location
 	
 func get_snake_location():
 	var location = snek.snake_data[0]
-	#location -= Vector2(0,1)
-	#print(location)
+	location -= Vector2(0,1)
+	print(location)
 	return location
 
-func get_obs_loc() -> Vector2:
+func get_obstacle_location() -> Vector2:
 	var obstacles = snek.get_tree().get_nodes_in_group("Obstacle")
 	if obstacles.size() > 0 and obstacles[0] is Node2D:
 		var obstacle_pos = (obstacles[0] as Node2D).position
@@ -121,7 +115,7 @@ func loop(delta:float):
 	#print(xdir)
 	#print(ydir)
 	
-	#var obs = get_obs_loc()
+	#var obs = get_obstacle_location()
 	#var player = get_snake_location()
 	#var xdir = obs.x - player.x
 	#var ydir = obs.y - player.y

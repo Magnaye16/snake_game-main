@@ -2,6 +2,8 @@ extends Node
 class_name Runner
 
 const obstacle_scene = preload("res://scenes/obstacle_node.tscn")
+const goal_scene = preload("res://scenes/goal_node.tscn")
+const food_scene = preload("res://scenes/foods.tscn")
 @onready var code_ui: Control = $CodeHUD/Control
 @export var snek: Snakehead
 var cpu: CPU
@@ -22,6 +24,10 @@ var regen_food: bool = true
 var obs_pos: Vector2
 var gen_obs: bool = true
 var num_obs: int = 15
+
+#Goal variables
+var goal_pos: Vector2
+var regen_goal: bool = true
 
 # Movement variables
 var up = Vector2(0, -1)
@@ -51,6 +57,7 @@ func new_game():
 	snek.generate()
 	init_and_move_food()
 	init_move_obstacle()
+	init_move_Goal()
 	snek.cpu.start()
 
 func move_snake():
@@ -59,7 +66,6 @@ func move_snake():
 			move_direction = down
 			can_move = false
 			(snek.snake_part[0] as Snakehead).get_node("Sprite2D/AnimatedSprite2D").play("Down")
-			#(snek.snake_part[0] as Snakehead).rotation_degrees = 90
 			if not game_started:
 				start_game()
 
@@ -67,7 +73,6 @@ func move_snake():
 			move_direction = up
 			can_move = false
 			(snek.snake_part[0] as Snakehead).get_node("Sprite2D/AnimatedSprite2D").play("Up")
-			#(snek.snake_part[0] as Snakehead).rotation_degrees = -90
 			if not game_started:
 				start_game()
 
@@ -75,7 +80,6 @@ func move_snake():
 			move_direction = left
 			can_move = false
 			(snek.snake_part[0] as Snakehead).get_node("Sprite2D/AnimatedSprite2D").play("Left")
-			#(snek.snake_part[0] as Snakehead).rotation_degrees = 180
 			if not game_started:
 				start_game()
 
@@ -83,7 +87,6 @@ func move_snake():
 			move_direction = right
 			can_move = false
 			(snek.snake_part[0] as Snakehead).get_node("Sprite2D/AnimatedSprite2D").play("Right")
-			#(snek.snake_part[0] as Snakehead).rotation_degrees = 0
 			if not game_started:
 				start_game()
 
@@ -142,13 +145,38 @@ func init_move_obstacle():
 			add_child(obs_instance)
 			obs_instance.add_to_group("Obstacle")  # Optional: helps with group logic
 			generated += 1
-	regen_food = true
+	gen_obs = true
 
 func check_obs_eaten():
 	for obs in get_tree().get_nodes_in_group("Obstacle"):
 		if obs is Node2D and snek.snake_data[0] == (obs.position - Vector2(0, cell_size)) / cell_size:
 			end_game()
 			return
+
+func init_move_Goal():
+	while regen_goal:
+		regen_goal = false
+		goal_pos = Vector2(randi_range(0, cells - 1), randi_range(0, cells - 1))
+		
+		# avoid placing obstacle on top of the snake
+		for i in snek.snake_data:
+			if goal_pos == i:
+				regen_goal = true
+				break
+		
+		if not regen_goal:
+			var goal_instance = goal_scene.instantiate()
+			goal_instance.position = (goal_pos * cell_size) + Vector2(0, cell_size)
+			add_child(goal_instance)
+			goal_instance.add_to_group("Goal")  # Optional: helps with group logic
+	regen_goal = true
+
+func check_goal_points():
+	if snek.snake_data[0] == goal_pos:
+		score += 1
+		$Hud.get_node("ScoreLabel").text = "SCORE: " + str(score)
+		snek.add_segment(snek.old_data[-1])
+		#init_and_move_food()
 
 func end_game():
 	$GameOverMenu.show()
