@@ -8,6 +8,7 @@ signal restart
 
 func _on_restart_button_pressed():
 	restart.emit()
+	hide()
 
 func _on_leaderboard_button_pressed():
 	game_over_panel.hide()

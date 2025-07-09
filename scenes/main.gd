@@ -24,6 +24,7 @@ var regen_food: bool = true
 var obs_pos: Vector2
 var gen_obs: bool = true
 var num_obs: int = 15
+var obs_positions: Array = []
 
 #Goal variables
 var goal_pos: Vector2
@@ -58,7 +59,7 @@ func new_game():
 	snek.generate()
 	init_and_move_food()
 	init_move_obstacle()
-	init_move_Goal()
+	#init_move_Goal()
 	snek.cpu.start()
 
 func move_snake():
@@ -124,6 +125,12 @@ func init_and_move_food():
 			if food_pos == i:
 				regen_food = true
 				
+				
+		#avoid placing food on top of the obstacle
+		for i in obs_positions :
+			if food_pos == i:
+				regen_food = true
+				
 	$Food.position = (food_pos * cell_size) + Vector2(0, cell_size)
 	regen_food = true
 
@@ -140,11 +147,17 @@ func init_move_obstacle():
 				gen_obs = true
 				break
 		
+		# avoid placing obstacle on top of the food
+		if obs_pos == food_pos:
+			gen_obs = true
+		
 		if not gen_obs:
 			var obs_instance = obstacle_scene.instantiate()
-			obs_instance.position = (obs_pos * cell_size) + Vector2(0, cell_size)
+			var actual_pos = (obs_pos * cell_size) + Vector2(0, cell_size)
+			obs_positions.append(obs_pos)
+			obs_instance.position = actual_pos
 			add_child(obs_instance)
-			obs_instance.add_to_group("Obstacle")  # Optional: helps with group logic
+			obs_instance.add_to_group("Obstacle")
 			generated += 1
 	gen_obs = true
 
@@ -173,6 +186,7 @@ func init_move_Goal():
 	regen_goal = true
 
 func check_goal_points():
+	#to do
 	if snek.snake_data[0] == goal_pos:
 		score += 1
 		$Hud.get_node("ScoreLabel").text = "SCORE: " + str(score)
