@@ -1,15 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://cne58nm5k0jlo"]
 
 [ext_resource type="Script" uid="uid://mts53jhmt8nv" path="res://scenes/goal_node.gd" id="1_8eny5"]
-[ext_resource type="Texture2D" uid="uid://dlp8ksophybqc" path="res://assets/download-removebg-preview.png" id="1_oxs65"]
+[ext_resource type="Texture2D" uid="uid://di3tfb6vx8gos" path="res://assets/unnamed.png" id="2_8eny5"]
 
 [node name="Goal_node" type="Node2D" groups=["Goal"]]
 script = ExtResource("1_8eny5")
 
 [node name="Obstacle" type="Sprite2D" parent="."]
-position = Vector2(17.1334, 15.7111)
-scale = Vector2(0.284485, 0.32615)
-texture = ExtResource("1_oxs65")
+scale = Vector2(0.96, 0.96)
+texture = ExtResource("2_8eny5")
 offset = Vector2(25, 25)
 
 [node name="Panel" type="Panel" parent="."]

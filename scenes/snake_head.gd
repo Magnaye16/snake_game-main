@@ -84,3 +84,4 @@ func _on_move_timer_timeout():
 	runner.check_self_eaten()
 	runner.check_food_eaten()
 	runner.check_obs_eaten()
+	runner.check_goal_points()

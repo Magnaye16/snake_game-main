@@ -23,7 +23,7 @@ var regen_food: bool = true
 #Obstacle variables
 var obs_pos: Vector2
 var gen_obs: bool = true
-var num_obs: int = 15
+var num_obs: int = 1
 var obs_positions: Array = []
 
 #Goal variables
@@ -50,6 +50,7 @@ func new_game():
 	get_tree().paused = false
 	get_tree().call_group("segments", "queue_free")
 	get_tree().call_group("Obstacle", "queue_free")
+	get_tree().call_group("Goal", "queue_free")
 	$GameOverMenu.hide()
 	$Food.show()
 	score = 0
@@ -59,7 +60,7 @@ func new_game():
 	snek.generate()
 	init_and_move_food()
 	init_move_obstacle()
-	#init_move_Goal()
+	init_move_Goal()
 	snek.cpu.start()
 
 func move_snake():
@@ -110,8 +111,8 @@ func check_self_eaten():
 
 func check_food_eaten():
 	if snek.snake_data[0] == food_pos:
-		score += 1
-		$Hud.get_node("ScoreLabel").text = "SCORE: " + str(score)
+		#score += 1
+		#$Hud.get_node("ScoreLabel").text = "SCORE: " + str(score)
 		snek.add_segment(snek.old_data[-1])
 		init_and_move_food()
 
@@ -186,12 +187,13 @@ func init_move_Goal():
 	regen_goal = true
 
 func check_goal_points():
-	#to do
+	#for i in range(1, len(snek.snake_data)):
 	if snek.snake_data[0] == goal_pos:
-		score += 1
+		score += len(snek.snake_part) -1
 		$Hud.get_node("ScoreLabel").text = "SCORE: " + str(score)
-		snek.add_segment(snek.old_data[-1])
-		#init_and_move_food()
+		#snek.snake_part.append(snek.segment)
+		snek.old_data.clear()
+		init_move_Goal()
 
 func end_game():
 	$GameOverMenu.show()

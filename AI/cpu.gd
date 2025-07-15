@@ -49,7 +49,13 @@ func get_food_location():
 	location -= Vector2(0,1)
 	print(location)
 	return location
-	
+
+func get_goal_location():
+	var location =  (snek.get_tree().get_nodes_in_group("Goal") as Array[Goal])[0].position/50
+	location -= Vector2(0,1)
+	print(location)
+	return location
+
 func get_snake_location():
 	var location = snek.snake_data[0]
 	location -= Vector2(0,1)
@@ -101,16 +107,16 @@ func start():
 	pass
 
 func loop(delta:float):
-	#var apple = get_food_location()
-	#var player = get_snake_location()
-	#var xdir = apple.x - player.x
-	#var ydir = apple.y - player.y
-	#if abs(xdir) > abs(ydir) :
-		#if sign(xdir)  == 1:  go_right()
-		#else: go_left()
-	#else:
-		#if sign(ydir)  == 1:  go_down()
-		#else: go_up()
+	var apple = get_food_location()
+	var player = get_snake_location()
+	var xdir = apple.x - player.x
+	var ydir = apple.y - player.y
+	if abs(xdir) > abs(ydir) :
+		if sign(xdir)  == 1:  go_right()
+		else: go_left()
+	else:
+		if sign(ydir)  == 1:  go_down()
+		else: go_up()
 		#
 	#print(xdir)
 	#print(ydir)
